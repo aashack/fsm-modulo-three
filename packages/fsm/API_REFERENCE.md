@@ -47,30 +47,30 @@ Given `const m = createMachine(config)`:
 ### Basic transition-table machine
 
 ```ts
-import { createMachine } from "@acme/fsm";
+import { createMachine } from '@acme/fsm';
 
 const m = createMachine({
-  states: ["A", "B"] as const,
-  alphabet: ["0", "1"] as const,
-  start: "A",
-  finals: ["A"] as const,
+  states: ['A', 'B'] as const,
+  alphabet: ['0', '1'] as const,
+  start: 'A',
+  finals: ['A'] as const,
   transition: {
-    A: { "0": "A", "1": "B" },
-    B: { "0": "A", "1": "B" }
-  }
+    A: { '0': 'A', '1': 'B' },
+    B: { '0': 'A', '1': 'B' },
+  },
 });
 
-console.log(m.run("1010")); // final state
+console.log(m.run('1010')); // final state
 ```
 
 ### Using a transition function
 
 ```ts
 const m2 = createMachine({
-  states: ["S0", "S1"] as const,
-  alphabet: ["a","b"] as const,
-  start: "S0",
-  transitionFn: (state, symbol) => state === "S0" ? "S1" : "S0"
+  states: ['S0', 'S1'] as const,
+  alphabet: ['a', 'b'] as const,
+  start: 'S0',
+  transitionFn: (state, symbol) => (state === 'S0' ? 'S1' : 'S0'),
 });
 ```
 
