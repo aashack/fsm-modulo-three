@@ -46,6 +46,22 @@ describe("modThree", () => {
     expect(() => modThree("102" as any)).toThrowError(FsmInputError);
     expect(() => modThree("abc" as any)).toThrowError(FsmInputError);
   });
+
+  it("handles very long input without overflowing", () => {
+    // generate 1000 zeros followed by a one
+    const long = "0".repeat(1000) + "1";
+    const { remainder } = modThree(long);
+    expect(remainder).toBe(1);
+  });
+
+  it("produces same result when leading zeros are present", () => {
+    expect(modThree("0010")).toEqual(modThree("10"));
+  });
+
+  it("all ones input cycles through states", () => {
+    // 5 ones -> binary 11111 = 31 -> 31%3 = 1
+    expect(modThree("11111").remainder).toBe(31 % 3 as 0 | 1 | 2);
+  });
 });
 
 describe("modThreeWithTrace", () => {
@@ -57,5 +73,22 @@ describe("modThreeWithTrace", () => {
     expect(trace).toHaveLength(3);
     // first step: from S0 consuming '1' -> S1
     expect(trace[0]).toEqual({ from: "S0", symbol: "1", to: "S1" });
+  });
+
+  it("returns empty trace for empty input", () => {
+    const { remainder, finalState, trace } = modThreeWithTrace("");
+    expect(remainder).toBe(0);
+    expect(finalState).toBe("S0");
+    expect(trace).toHaveLength(0);
+  });
+
+  it("trace last element matches final state", () => {
+    const input = "1101";
+    const { finalState, trace } = modThreeWithTrace(input);
+    expect(trace[trace.length - 1]?.to).toBe(finalState);
+  });
+
+  it("throws FsmInputError when trace is requested with invalid symbol", () => {
+    expect(() => modThreeWithTrace("10a01" as any)).toThrowError(FsmInputError);
   });
 });

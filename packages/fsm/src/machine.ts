@@ -76,6 +76,7 @@ export function createMachine<State extends string, Symbol extends string>(
 
     step: (state, symbol) => transitionFn(state, symbol),
 
+    // the main execution loop: iterates through the input symbols, updating the state at each step.  The final state is returned after consuming the entire input.  Symbol validity is checked on-the-fly, allowing for early failure on invalid inputs.
     run: (input) => {
       let state = config.start;
       for (const raw of symbolsFrom(input)) {
@@ -84,7 +85,8 @@ export function createMachine<State extends string, Symbol extends string>(
       }
       return state;
     },
-
+    
+    // the trace is built up incrementally as the input is consumed.  Each step records the source state, consumed symbol, and target state.  The final result includes both the end state and the full trace.
     runWithTrace: (input) => {
       let state = config.start;
       const trace: TraceStep<State, Symbol>[] = [];

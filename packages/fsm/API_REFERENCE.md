@@ -1,4 +1,4 @@
-# @aashack/fsm — API Reference (short)
+# @aashack/fsm — API Reference 
 
 This is a compact reference for the public API provided by the `@aashack/fsm` package.
 
