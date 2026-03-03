@@ -1,0 +1,22 @@
+{
+  "name": "fsm-api",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@aashack/fsm":  "file:../../packages/fsm",
+    "@fastify/static": "^7.0.4",
+    "fastify": "4.x"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.9.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "test": "vitest run && playwright test"
+  }
+}
