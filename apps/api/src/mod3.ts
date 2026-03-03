@@ -9,12 +9,17 @@ export type Bit = "0" | "1";
  * The transitions are defined such that reading a '0' keeps the same remainder, while reading a '1' advances to the next remainder (modulo 3).
  */
 export const mod3Config: MachineConfig<Mod3State, Bit> = {
+  // Q (finite set of states)
   states: ["S0", "S1", "S2"] as const,
+  // Σ (input alphabet)
   alphabet: ["0", "1"] as const,
+  // q0 (start state)
   start: "S0",
   // For mod-3, every state is "final" because we always return the remainder.
+  // F (final/accepting states)
   finals: ["S0", "S1", "S2"] as const,
   // Transition table defining how the machine moves from one state to another based on the input symbol.
+  // δ (transition function)
   transition: {
     S0: { "0": "S0", "1": "S1" },
     S1: { "0": "S2", "1": "S0" },
