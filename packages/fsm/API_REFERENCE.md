@@ -1,6 +1,6 @@
-# @acme/fsm — API Reference (short)
+# @aashack/fsm — API Reference (short)
 
-This is a compact reference for the public API provided by the `@acme/fsm` package.
+This is a compact reference for the public API provided by the `@aashack/fsm` package.
 
 ## Exports
 
@@ -47,7 +47,7 @@ Given `const m = createMachine(config)`:
 ### Basic transition-table machine
 
 ```ts
-import { createMachine } from '@acme/fsm';
+import { createMachine } from '@aashack/fsm';
 
 const m = createMachine({
   states: ['A', 'B'] as const,
@@ -79,7 +79,3 @@ const m2 = createMachine({
 - Use `as const` when declaring `states` and `alphabet` for the best TypeScript inference.
 - The library validates configuration shape strictly; prefer full transition tables for clearer static correctness unless you need computed transitions.
 - `runWithTrace` is useful for debugging and educational purposes but can be expensive for long inputs.
-
----
-
-This file is intentionally short — for full usage examples see `packages/fsm/README.md` and the `apps/api` example (mod‑3).
