@@ -37,5 +37,4 @@ Response:
 - Empty string is treated as `0` (remainder 0). This matches the DFA concept of consuming no symbols and remaining in the start state.
 
 ## End-to-end tests
-
-E2E tests use Playwright and run against the real server (Option B). They live in `fsm-api/e2e/`.
+They live in `fsm-api/e2e/`.
